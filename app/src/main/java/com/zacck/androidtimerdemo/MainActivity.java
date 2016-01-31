@@ -1,5 +1,6 @@
 package com.zacck.androidtimerdemo;
 
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,27 @@ public class MainActivity extends AppCompatActivity {
         };
 
         //Start the Thread
-        mAndroidHandler.post(mRun);
+        //Uncomment to start thread at intervals
+        //mAndroidHandler.post(mRun);
+
+        //Doing a Task regularly Using a CountDownTimer
+
+        new CountDownTimer(10000/*run every ten seconds*/,1000/*tick every second*/){
+
+            public void onFinish(){
+                //this code runs when the countdown is finished
+                Log.i(getPackageName(), "Countdown Timer finished ");
+            }
+
+            //this is called on every interval
+            public void onTick(long milliSecondsUntilDone)
+            {
+               //happens every interval of the countdown
+                Log.i(getPackageName(), String.valueOf(milliSecondsUntilDone/1000)+" Seconds Left");
+
+            }
+
+
+        }.start();
     }
 }
