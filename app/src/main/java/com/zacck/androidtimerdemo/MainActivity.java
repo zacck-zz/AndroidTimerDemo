@@ -1,7 +1,9 @@
 package com.zacck.androidtimerdemo;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -9,5 +11,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //lets create a handler
+        //allows chunks of code to be run in a delayed manner the handler controlls the timing betwwen run
+        final Handler mAndroidHandler = new Handler();
+
+        Runnable mRun = new Runnable() {
+            @Override
+            public void run() {
+                //insert code to be run at each interval
+                Log.i(getPackageName(), "A second has passed runnable needs to be run");
+
+                mAndroidHandler.postDelayed(/*this runnable*/this, /*run the code every second*/1000);
+            }
+        };
+
+        //Start the Thread
+        mAndroidHandler.post(mRun);
     }
 }
